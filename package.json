@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "playwright:yasb:debug": "PWDEBUG=1 npx playwright test tests/yasb.spec.ts",
+    "playwright:yasb": "npx playwright test tests/yasb.spec.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
