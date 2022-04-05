@@ -1,4 +1,5 @@
 import { test, expect, Page } from '@playwright/test'
+import ''
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://yasb.app/')
@@ -7,7 +8,10 @@ test.beforeEach(async ({ page }) => {
 test.describe('Adding single pilot in squad', () => {
   test('adding Luke Skywalker in Rebels', async ({ page }) => {
     // Add Luke Skywalker in T-65 X-Wing
-    await page.locator('span[id="select2-chosen-6"]').click()
+    await page
+      .locator('#rebelContent .select2-chosen:text("Select a ship")')
+      .nth(0)
+      .click()
     await page.locator('input[id="s2id_autogen6_search"]').type('T-65 X-Wing')
     await page.locator('div[role="option"]:has-text("T-65 X-Wing")').click()
     await page.locator('text=Blue Squadron Escort (4/4)').click()
@@ -28,8 +32,12 @@ test.describe('Adding single pilot in squad', () => {
     await page.locator('.btn-danger:has-text("Discard Changes")').click()
   })
   test('adding Darth Vader in Galactic Empire', async ({ page }) => {
+    
     await Promise.all([page.locator('#empireTab').click()])
-    await page.locator('#select2-chosen-14').click()
+    await page
+      .locator('#empireContent .select2-chosen:text("Select a ship")')
+      .nth(0)
+      .click()
     await page.locator('#s2id_autogen14_search').fill('TIE Advanced x1')
     await page.locator('div[role="option"]:has-text("TIE Advanced x1")').click()
     await page.locator('text=Storm Squadron Ace (3/2)').click()
@@ -44,7 +52,12 @@ test.describe('Adding single pilot in squad', () => {
   })
   test('adding Boba Fett in Scum and Villany', async ({ page }) => {
     await Promise.all([page.locator('#scumTab').click()])
-    await page.locator('#select2-chosen-22').click()
+    await Promise.all([
+      page
+        .locator('#scumContent .select2-chosen:text("Select a ship")')
+        .nth(0)
+        .click(),
+    ])
     await page
       .locator('#s2id_autogen22_search')
       .fill('Firespray-class Patrol Craft')
