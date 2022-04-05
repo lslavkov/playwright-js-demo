@@ -1,5 +1,4 @@
 import { test, expect, Page } from '@playwright/test'
-import ''
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://yasb.app/')
